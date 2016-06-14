@@ -1,0 +1,11 @@
+#error-email {
+    color: red;
+}
+
+#error-name {
+    color: red;
+}
+
+.inactive {
+    background: lightgrey;
+}
