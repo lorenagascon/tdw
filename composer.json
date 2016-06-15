@@ -6,9 +6,7 @@
     "type": "project",
     "require": {
         "php": ">=5.5.9",
-        "laravel/framework": "5.2.*",
-        "larakit/sf-bootstrap-switch": "dev-master",
-        "nostalgiaz/bootstrap-switch": "3.3.2"
+        "laravel/framework": "5.2.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
