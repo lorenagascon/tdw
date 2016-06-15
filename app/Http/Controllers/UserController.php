@@ -64,18 +64,8 @@ class UserController extends Controller
         ]);
         try {
             $user = User::findOrFail($id);
-
             $user->update($request->except(['password', 'id']));
-            /*$user->username = $request->input('username');
-            $user->email = $request->input('email');
-            if($request->input('password')!=null)
-                $user->password = $request->input('password');
-            $user->enabled = $request->input('enabled');
-            $user->rol = $request->input('rol');
-
-            $user->save();*/
             return response()->json(['code' => 200, 'message' => 'Usuario actualizado correctamente', 'user' => $user], 200);
-
         } catch (ModelNotFoundException $ex) {
             return response()->json(['code' => 404, 'message' => 'No se encuentra el usuario con id '.$id], 404);
         }catch (QueryException $ex) {
