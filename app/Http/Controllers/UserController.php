@@ -65,11 +65,24 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
             $user->update($request->except(['password', 'id']));
+<<<<<<< HEAD
             return response()->json(['code' => 200, 'message' => 'Usuario actualizado correctamente', 'user' => $user], 200);
+=======
+            /*$user->username = $request->input('username');
+            $user->email = $request->input('email');
+            if($request->input('password')!=null)
+                $user->password = $request->input('password');
+            $user->enabled = $request->input('enabled');
+            $user->rol = $request->input('rol');
+
+            $user->save();*/
+            return response()->json(['code' => 200, 'message' => 'User successfully updated', 'user' => $user], 200);
+
+>>>>>>> a30758e5cdafb1c1fff5ddc5eacf489107adba0c
         } catch (ModelNotFoundException $ex) {
-            return response()->json(['code' => 404, 'message' => 'No se encuentra el usuario con id '.$id], 404);
+            return response()->json(['code' => 404, 'message' => 'Cannot find user with id ' . $id], 404);
         }catch (QueryException $ex) {
-            return response()->json(['code' => 400, 'message' => 'Usuario o email ya existe'], 400);
+            return response()->json(['code' => 400, 'message' => 'User or email already exists'], 400);
         }
     }
 

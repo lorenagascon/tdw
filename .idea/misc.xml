@@ -10,5 +10,9 @@
     <ConfirmationsSetting value="0" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
+<<<<<<< HEAD
   <component name="ProjectRootManager" version="2" languageLevel="JDK_1_3" assert-keyword="false" jdk-15="false" />
+=======
+  <component name="ProjectRootManager" version="2" assert-keyword="false" jdk-15="false" />
+>>>>>>> a30758e5cdafb1c1fff5ddc5eacf489107adba0c
 </project>
