@@ -23,3 +23,11 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'phone' => $faker->phoneNumber
     ];
 });
+
+$factory->define(App\Court::class, function (Faker\Generator $faker) {
+    return [
+        'active' => $faker->boolean(75)
+    ];
+});
+
+
