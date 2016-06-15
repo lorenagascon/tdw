@@ -18,7 +18,6 @@
                                     <th>Username</th>
                                     <th>Email</th>
                                     <th>Options</th>
-                                    <th>Active</th>
                                 </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -36,6 +35,10 @@
                             </div>
                             <div class="modal-body">
                                 <form id="edit-form">
+                                    <div class="form-group">
+                                        <label for="act">Do you want to active this user?</label>
+                                        <input type="checkbox" name="active-checkbox" id="act">
+                                    </div>
                                     <div class="form-group">
                                         <label for="usr">Username:</label>
                                         <input type="text" class="form-control" id="usr">

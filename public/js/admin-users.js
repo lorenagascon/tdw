@@ -13,6 +13,7 @@ $(document).ready(function () {
         var name = button.data('edit-name');
         var surname = button.data('edit-surname');
         var phone = button.data('edit-phone');
+        var active = button.data('edit-active');
         idToEdit = button.data('edit-id');
         var modal = $(this);
 
@@ -21,24 +22,24 @@ $(document).ready(function () {
         modal.find("#nme").val(name);
         modal.find("#srnme").val(surname);
         modal.find("#phone").val(phone);
+        if (active == 1) $("#act").prop('checked', true);
+        if (active == 0) $("#act").prop('checked', false);
         $('#rol option[value="' + rol + '"]').prop('selected', 'selected');
     });
 
     $('#edit-button').on("click", function (event) {
 
         var modal = $('#modalEdit');
-
         $.ajax({
             url: 'users/' + idToEdit,
             type: 'PUT',
-            data: "username=" + modal.find("#usr").val() + "&email=" + modal.find("#mail").val() + "&rol=" + modal.find("#rol option:selected").val() + "&name=" + modal.find("#nme").val() + "&surname=" + modal.find("#srnme").val() + "&phone=" + modal.find("#phone").val()
+            data: "username=" + modal.find("#usr").val() + "&email=" + modal.find("#mail").val() + "&rol=" + modal.find("#rol option:selected").val() + "&name=" + modal.find("#nme").val() + "&surname=" + modal.find("#srnme").val() + "&phone=" + modal.find("#phone").val() + "&enabled=" + (modal.find("#act").is(':checked')? 1:0)
         }).done(function (data) {
                 modal.modal('toggle');
                 $("#tabla-usuarios tbody").empty();
                 getAllUsers();
                 $("#error-name").text('');
                 $("#error-email").text('');
-                console.log(data);
             })
             .fail(function (jqXHR, textStatus, error) {
                 var respJson = JSON.parse(jqXHR.responseText);
@@ -95,15 +96,10 @@ function getAllUsers() {
                     row += '<td><span class="glyphicon glyphicon-user"></span></td>';
 
                 row += '<td class="id">' + jsonData[i].id + '</td><td>' + jsonData[i].username + '</td><td>' + jsonData[i].email +
-                    '</td><td><button type="button" class="edit btn btn-default" data-edit-id="' + jsonData[i].id + '" data-edit-username="' + jsonData[i].username + '" data-edit-email="' + jsonData[i].email + '" data-edit-rol="' + jsonData[i].rol + '" data-edit-name="' + jsonData[i].name + '" data-edit-surname="' + jsonData[i].surname + '" data-edit-phone="' + jsonData[i].phone + '" data-toggle="modal" data-target="#modalEdit" aria-label="Left Align">' +
+                    '</td><td><button type="button" class="edit btn btn-default" data-edit-id="' + jsonData[i].id + '" data-edit-username="' + jsonData[i].username + '" data-edit-email="' + jsonData[i].email + '" data-edit-rol="' + jsonData[i].rol + '" data-edit-active="' + jsonData[i].enabled + '"data-edit-name="' + jsonData[i].name + '" data-edit-surname="' + jsonData[i].surname + '" data-edit-phone="' + jsonData[i].phone + '" data-toggle="modal" data-target="#modalEdit" aria-label="Left Align">' +
                     '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
                     '<button type="button" class="delete btn btn-default" data-delete-id="' + jsonData[i].id + '" data-delete-username="' + jsonData[i].username + '"data-toggle="modal" data-target="#modalDelete" aria-label="Left Align">' +
                     '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>';
-
-                if (jsonData[i].enabled == '1')
-                    row += '<td><input type="checkbox" name="active-checkbox" checked></td></tr>';
-                else
-                    row += '<td><input type="checkbox" name="active-checkbox"></td></tr>';
 
                 $('#tabla-usuarios').append(row);
             }
