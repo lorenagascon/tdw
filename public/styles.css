@@ -6,6 +6,10 @@
     color: red;
 }
 
+#table th{
+    height: 5em;
+}
+
 .act {
     float: right;
 }
@@ -13,3 +17,4 @@
 .inactive {
     background: lightgrey;
 }
+
