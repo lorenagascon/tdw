@@ -49,7 +49,7 @@ class UserController extends Controller
             $newUser = User::create($request->all());
             $newUser->password = bcrypt($request->input('password'));
             $newUser->save();
-            return response()->json(['user' => $newUser], 200);
+            return response()->json(['message'=>'User created successfully','user' => $newUser], 200);
         }
         else
             return response()->json(['code' => '422', 'message' => 'Password is empty'], 422);
@@ -66,7 +66,7 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->update($request->except(['password', 'id']));
             
-            return response()->json(['code' => 200, 'message' => 'User successfully updated', 'user' => $user], 200);
+            return response()->json(['code' => 200, 'message' => 'User updated successfully', 'user' => $user], 200);
         } catch (ModelNotFoundException $ex) {
             return response()->json(['code' => 404, 'message' => 'User not found', 'id' => $id], 404);
         }catch (QueryException $ex) {

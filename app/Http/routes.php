@@ -13,7 +13,15 @@
 
 Route::resource('users', 'UserController');
 Route::options('users', 'UserController@options');
+Route::resource('courts', 'CourtController');
+Route::options('courts', 'CourtController@options');
 
 Route::auth();
 Route::get('/', 'HomeController@index');
 Route::get('/home', 'HomeController@index');
+Route::get('admin', 'AdminController@index');
+Route::get('admin/users', 'AdminController@users');
+Route::get('admin/courts', 'AdminController@courts');
+Route::get('admin/profile', 'AdminController@profile');
+Route::get('admin/reservations', 'AdminController@reservations');
+

@@ -43,7 +43,7 @@ class CourtController extends Controller
     public function store(Request $request)
     {
         $newCourt = Court::create($request->all());
-        return response()->json(["message" => 'Court successfully created', 'court' => $newCourt], 200);
+        return response()->json(["message" => 'Court created successfully', 'court' => $newCourt], 200);
     }
 
     /**
@@ -74,7 +74,7 @@ class CourtController extends Controller
         if ($newCourt != null) {
             $newCourt->active = $request->input("active");
             $newCourt->save();
-            return response()->json(["message" => "Court successfully updated", "court" => $newCourt], 200);
+            return response()->json(["message" => "Court updated successfully"], 200);
         } else {
             return response()->json(['code' => 404, 'message' => 'Court not found', "id" => $id], 404);
         }
