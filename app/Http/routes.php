@@ -11,10 +11,11 @@
 |
 */
 
-Route::resource('users', 'UserController');
+Route::resource('users', 'UserController', ['except' => ['edit', 'create']]);
 Route::options('users', 'UserController@options');
-Route::resource('courts', 'CourtController');
+Route::resource('courts', 'CourtController', ['except' => ['edit', 'create']]);
 Route::options('courts', 'CourtController@options');
+Route::resource('reservations', 'CourtsUsersController', ['except' => ['edit', 'create']]);
 
 Route::auth();
 Route::get('/', 'HomeController@index');
