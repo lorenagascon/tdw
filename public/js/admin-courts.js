@@ -1,8 +1,13 @@
 $(document).ready(function () {
-    
     getAllCourts();
 
+    $('.panel-body').on("change", ":checkbox", function (event) {
+        console.log(event.currentTarget);
+        var aux = $(event.currentTarget).prop("checked");
+        console.log(aux)
+    });
 });
+
 
 function getAllCourts() {
     $.ajax({
@@ -10,23 +15,16 @@ function getAllCourts() {
         type: 'GET',
         dataType: "json",
         success: function (data) {
-            var jsonData = data.users;
+            var jsonData = data.courts;
+            var row = '';
             console.log(jsonData);
             for (var i in jsonData) {
-                var row = '<tr class="' + (!jsonData[i].enabled ? 'active' : '') + '">';
-                if (jsonData[i].rol == '1')
-                    row += '<td><span class="glyphicon glyphicon-cog"></span></td>';
-                else
-                    row += '<td><span class="glyphicon glyphicon-user"></span></td>';
-
-                row += '<td class="id">' + jsonData[i].id + '</td><td>' + jsonData[i].username + '</td><td>' + jsonData[i].email +
-                    '</td><td><button type="button" class="edit btn btn-default" data-edit-id="' + jsonData[i].id + '" data-edit-username="' + jsonData[i].username + '" data-edit-email="' + jsonData[i].email + '" data-edit-rol="' + jsonData[i].rol + '" data-edit-active="' + jsonData[i].enabled + '"data-edit-name="' + jsonData[i].name + '" data-edit-surname="' + jsonData[i].surname + '" data-edit-phone="' + jsonData[i].phone + '" data-toggle="modal" data-target="#modalEdit" aria-label="Left Align">' +
-                    '<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span></button>' +
-                    '<button type="button" class="delete btn btn-default" data-delete-id="' + jsonData[i].id + '" data-delete-username="' + jsonData[i].username + '"data-toggle="modal" data-target="#modalDelete" aria-label="Left Align">' +
-                    '<span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button></td>';
-
-                $('#tabla-usuarios').append(row);
+                row += '<div class="col-sm-4"><h4>Court ' + jsonData[i].id + '</h4>';
+                row += '<input type="checkbox" id="' + jsonData[i].id + '"' + (jsonData[i].active ? "checked" : "") + '>Active court';
+                row += '<table class="table table-bordered court"><tr class="success"><th></th><th></th></tr><tr class="success"><th></th><th></th></tr></table></div>';
             }
+
+            $('.panel-body').append(row);
         },
         error: function (jqXHR, textStatus, error) {
             console.log(textStatus);
