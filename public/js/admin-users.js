@@ -31,7 +31,7 @@ $(document).ready(function () {
 
         var modal = $('#modalEdit');
         $.ajax({
-            url: 'users/' + idToEdit,
+            url: '../users/' + idToEdit,
             type: 'PUT',
             data: "username=" + modal.find("#usr").val() + "&email=" + modal.find("#mail").val() + "&rol=" + modal.find("#rol option:selected").val() + "&name=" + modal.find("#nme").val() + "&surname=" + modal.find("#srnme").val() + "&phone=" + modal.find("#phone").val() + "&enabled=" + (modal.find("#act").is(':checked')? 1:0)
         }).done(function (data) {
@@ -64,7 +64,7 @@ $(document).ready(function () {
 
     $('#delete-button').on("click", function (event) {
             $.ajax({
-                url: 'users/' + idToDelete,
+                url: '../users/' + idToDelete,
                 type: 'DELETE',
                 cache: true
             }).done(function () {
@@ -76,13 +76,13 @@ $(document).ready(function () {
                     console.log("error: " + jqXHR.responseText);
                 });
         })
-    });
+});
 
 
 /* Funciones */
 function getAllUsers() {
     $.ajax({
-        url: 'users',
+        url: '../users',
         type: 'GET',
         dataType: "json",
         success: function (data) {
