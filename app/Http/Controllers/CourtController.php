@@ -27,9 +27,9 @@ class CourtController extends Controller
     public function index()
     {
         if (Court::all()->count() > 0) {
-            return response()->json(['users' => Court::all()], 200);
+            return response()->json(['courts' => Court::all()], 200);
         } else {
-            return response()->json(['code' => '404', 'message' => 'User object not found'], 404);
+            return response()->json(['code' => '404', 'message' => 'Court object not found'], 404);
         }
     }
 
@@ -43,7 +43,7 @@ class CourtController extends Controller
     public function store(Request $request)
     {
         $newCourt = Court::create($request->all());
-        return response()->json(["message" => 'Pista creada correctamente', 'court' => $newCourt], 200);
+        return response()->json(["message" => 'Court successfully created', 'court' => $newCourt], 200);
     }
 
     /**
@@ -57,7 +57,7 @@ class CourtController extends Controller
         if (Court::find($id) != null)
             return response()->json(['court' => Court::find($id)], 200);
         else
-            return response()->json(['code' => '404', 'message' => 'Court id. not found'], 404);
+            return response()->json(['code' => '404', 'message' => 'Court not found', 'id' => $id], 404);
     }
 
     /**
@@ -74,9 +74,9 @@ class CourtController extends Controller
         if ($newCourt != null) {
             $newCourt->active = $request->input("active");
             $newCourt->save();
-            return response()->json(["message" => "Court successfully updated"], 200);
+            return response()->json(["message" => "Court successfully updated", "court" => $newCourt], 200);
         } else {
-            return response()->json(['code' => 404, 'message' => 'Cannot find court with id ' . $id], 404);
+            return response()->json(['code' => 404, 'message' => 'Court not found', "id" => $id], 404);
         }
     }
 
@@ -90,7 +90,7 @@ class CourtController extends Controller
     {
         if (Court::find($id) != null) {
             Court::destroy($id);
-            return response()->json(['code' => '204', 'message' => 'Court deleted successfully'], 204);
+            return response()->json(['message' => 'Court deleted successfully'], 204);
         } else
             return response()->json(['code' => '404', 'message' => 'Court not found'], 404);
     }
