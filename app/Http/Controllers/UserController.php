@@ -24,35 +24,35 @@ class UserController extends Controller
         if (User::all()!=null)
             return response()->json(['users' => User::all()], 200);
         else
-            return response()->json(['code' => '404', 'message' => 'User object not found'], 404);
+            return response()->json(['code' => '404', 'message' => 'User objects not found'], 404);
     }
     
     public function store(Request $request)
     {
         if ($request->input('username') != null){
             if (User::where('username', $request->input('username'))->count()>0){
-                return response()->json(['code' => '400', 'message' => 'Username already exists'], 400);
+                return response()->json(['code' => '400', 'message' => 'Username already exists', "username" => $request->input("username")], 400);
             }
         }
         else
-            return response()->json(['code' => '422', 'message' => 'Username is left out'], 422);
+            return response()->json(['code' => '422', 'message' => 'Username is empty'], 422);
 
         if ($request->input('email') != null){
             if (User::where('email', $request->input('email'))->count()>0){
-                return response()->json(['code' => '400', 'message' => 'Email already exists'], 400);
+                return response()->json(['code' => '400', 'message' => 'Email already exists', "email" => $request->input("email")], 400);
             }
         }
         else
-            return response()->json(['code' => '422', 'message' => 'Email is left out'], 422);
+            return response()->json(['code' => '422', 'message' => 'Email is empty'], 422);
 
         if ($request->input('password') != null){
             $newUser = User::create($request->all());
             $newUser->password = bcrypt($request->input('password'));
             $newUser->save();
-            return response()->json(['user' => $newUser], 200);
+            return response()->json(['message'=>'User created successfully','user' => $newUser], 200);
         }
         else
-            return response()->json(['code' => '422', 'message' => 'Password is left out'], 422);
+            return response()->json(['code' => '422', 'message' => 'Password is empty'], 422);
     }
 
     public function update(Request $request, $id)
@@ -66,9 +66,9 @@ class UserController extends Controller
             $user = User::findOrFail($id);
             $user->update($request->except(['password', 'id']));
             
-            return response()->json(['code' => 200, 'message' => 'User successfully updated', 'user' => $user], 200);
+            return response()->json(['code' => 200, 'message' => 'User updated successfully', 'user' => $user], 200);
         } catch (ModelNotFoundException $ex) {
-            return response()->json(['code' => 404, 'message' => 'Cannot find user with id ' . $id], 404);
+            return response()->json(['code' => 404, 'message' => 'User not found', 'id' => $id], 404);
         }catch (QueryException $ex) {
             return response()->json(['code' => 400, 'message' => 'User or email already exists'], 400);
         }
@@ -79,7 +79,7 @@ class UserController extends Controller
         if (User::find($id)!=null)
             return response()->json(['users' => User::find($id)], 200);
         else
-            return response()->json(['code' => '404', 'message' => 'User id. not found'], 404);
+            return response()->json(['code' => '404', 'message' => 'User not found', 'id' => $id], 404);
     }
 
     public function destroy($id)
@@ -89,7 +89,7 @@ class UserController extends Controller
             return response()->json(['code' => '204', 'message' => 'User deleted successfully'], 204);
         }
         else
-            return response()->json(['code' => '404', 'message' => 'User not found'], 404);
+            return response()->json(['code' => '404', 'message' => 'User not found', 'id' => $id], 404);
     }
 
     public function options(){
