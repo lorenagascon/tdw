@@ -28,6 +28,6 @@ class HomeController extends Controller
         if (Auth::user()->rol == 1)
             return redirect('admin');
         else
-            return view('user');
+            return view('home');
     }
 }

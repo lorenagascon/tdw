@@ -6,6 +6,10 @@
     color: red;
 }
 
+#prof-btn {
+    float: right;
+}
+
 .court th{
     height: 5em;
 }
@@ -14,7 +18,4 @@
     float: right;
 }
 
-.inactive {
-    background: lightgrey;
-}
 

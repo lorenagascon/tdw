@@ -75,7 +75,23 @@ $(document).ready(function () {
                 .fail(function (jqXHR, textStatus, error) {
                     console.log("error: " + jqXHR.responseText);
                 });
-        })
+    });
+
+    //Guardar los cambios realizados en los datos del perfil
+    $('#prof-btn').on("click", function (event) {
+        console.log('hola');
+        if ($('#prof-psswrd').val() == $('#prof-psswrd-2').val())
+            $.ajax({
+                url: '../users/' + $('#prof-id').val(),
+                type: 'PUT',
+                data: "username=" + $('#prof-usr').val() + "&name=" + $('#prof-nme').val() + "&surname" + $('#prof-srnme').val() + "&email=" + $("#prof-mail").val() + "&phone=" + $('#prof-phone').val() + "&password=" + $('#prof-psswrd').val()
+            }).done(function () {
+                $("#prof-success").text('Profile updated successfully');
+            });
+        else
+            $('#prof-error').text('Password does not match');
+    });
+
 });
 
 

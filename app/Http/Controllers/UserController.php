@@ -65,6 +65,7 @@ class UserController extends Controller
         try {
             $user = User::findOrFail($id);
             $user->update($request->except(['password', 'id']));
+            $user->password = bcrypt($request->input('password'));
             
             return response()->json(['code' => 200, 'message' => 'User updated successfully', 'user' => $user], 200);
         } catch (ModelNotFoundException $ex) {
