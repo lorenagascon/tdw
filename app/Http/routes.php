@@ -23,6 +23,6 @@ Route::get('/home', 'HomeController@index');
 Route::get('admin', 'AdminController@index');
 Route::get('admin/users', 'AdminController@users');
 Route::get('admin/courts', 'AdminController@courts');
-Route::get('admin/profile', 'AdminController@profile');
 Route::get('admin/reservations', 'AdminController@reservations');
+Route::get('admin/profile', 'AdminController@profile');
 

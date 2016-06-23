@@ -2,6 +2,8 @@
 
 @section('content')
 
+        <!-- TODO Gestion de reservas para el admnistrador -->
+
     <h2>Padel Courts</h2>
 
     <div class='col-sm-4'>
