@@ -27,7 +27,9 @@ class HomeController extends Controller
     {
         if (Auth::user()->rol == 1)
             return redirect('admin');
-        else
+        elseif (Auth::user()->enabled == 1)
             return view('home');
+        else
+            return view('userNotAllowed');
     }
 }

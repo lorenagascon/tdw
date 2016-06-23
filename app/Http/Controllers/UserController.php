@@ -61,6 +61,9 @@ class UserController extends Controller
             'username' => 'required|max:255|unique:users,username,'.$id,
             'email' => 'required|email|max:255|unique:users,email,'.$id,
             'password' => 'min:6',
+            'name' => 'string|max:50|min:3',
+            'surname' => 'string|max:80|min:10',
+            'telephone' => 'string|min:9'
         ]);
         try {
             $user = User::findOrFail($id);
