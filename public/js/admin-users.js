@@ -86,6 +86,7 @@ $(document).ready(function () {
                 type: 'PUT',
                 data: "username=" + $('#prof-usr').val() + "&name=" + $('#prof-nme').val() + "&surname" + $('#prof-srnme').val() + "&email=" + $("#prof-mail").val() + "&phone=" + $('#prof-phone').val() + "&password=" + $('#prof-psswrd').val()
             }).done(function () {
+                $('#prof-error').text('');
                 $("#prof-success").text('Profile updated successfully');
             });
         else
