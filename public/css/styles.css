@@ -18,12 +18,22 @@
     color: red;
 }
 
+#search {
+    margin-top: 1.7em;
+}
+
 .court th{
     height: 5em;
 }
 
 .act {
     float: right;
+}
+
+.imagen {
+    max-height: 25em;
+    width: 100%;
+    margin-bottom: 2em;
 }
 
 
