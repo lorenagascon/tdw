@@ -30,8 +30,11 @@ class CourtsUsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('date')) {
+            return response()->json(['reservations' => CourtUser::where('reservation_date', $request->input('date'))->get()], 200);
+        }
         if (CourtUser::all()->count() > 0) {
             return response()->json(['reservations' => CourtUser::all()], 200);
         } else {

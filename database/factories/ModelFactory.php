@@ -30,4 +30,15 @@ $factory->define(App\Court::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\CourtUser::class, function (Faker\Generator $faker) {
+    return [
+        'reservation_date' => $faker->dateTime,
+        'users_id' => '6',
+        'courts_id' => '2',
+        '2nd_player' => $faker->firstName,
+        '3rd_player' => $faker->firstName,
+        '4th_player' => $faker->firstName,
+    ];
+});
+
 

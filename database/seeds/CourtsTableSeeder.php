@@ -11,6 +11,6 @@ class CourtsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Court::class)->times(5)->create();
+        factory(\App\Court::class)->times(6)->create();
     }
 }

@@ -22,6 +22,14 @@
     margin-top: 1.7em;
 }
 
+#save {
+    float: right;
+}
+
+#separar {
+    margin-bottom: 1em;
+}
+
 .court th{
     height: 5em;
 }
@@ -36,4 +44,11 @@
     margin-bottom: 2em;
 }
 
+.tabla:hover {
+    cursor: pointer;
+}
+
+.table-selected th {
+    background-color: green !important;
+}
 
