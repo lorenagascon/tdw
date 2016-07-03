@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap-datetimepicker.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/toastr.css') }}" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
 
     <script src="{{asset("js/jquery-2.2.4.min.js")}}" type="text/javascript"></script>
+    <script src="{{asset("js/toastr.js")}}" type="text/javascript"></script>
 
     <style>
         body {
@@ -58,6 +60,7 @@
                         @else
                                 <!-- Authentication Links -->
                         <li class="dropdown">
+                            <input id="miID" type="hidden" value="{{ Auth::user()->id }}">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                                aria-expanded="false">
                                 {{ Auth::user()->username }} <span class="caret"></span>

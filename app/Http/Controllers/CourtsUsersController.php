@@ -10,10 +10,11 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesResources;
 use Illuminate\Foundation\Bus\DispatchesJobs;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 use App\Http\Requests;
-use Illuminate\Support\Facades\Validator;
+
 
 class CourtsUsersController extends Controller
 {
@@ -35,6 +36,9 @@ class CourtsUsersController extends Controller
         if ($request->has('date')) {
             return response()->json(['reservations' => CourtUser::where('reservation_date', $request->input('date'))->get()], 200);
         }
+        if ($request->has('id')) {
+            return response()->json(['reservations' => CourtUser::where('users_id', $request->input('id'))->orderBy('reservation_date')->get()], 200);
+        }
         if (CourtUser::all()->count() > 0) {
             return response()->json(['reservations' => CourtUser::all()], 200);
         } else {
@@ -50,34 +54,29 @@ class CourtsUsersController extends Controller
      */
     public function store(Request $request)
     {
-        if (!$request->has("users_id")) {
-            return response()->json(["code" => 400, "message" => "User Id is empty"], 422);
-        } elseif (!$request->has("courts_id")) {
+        if (!$request->has("courts_id")) {
             return response()->json(["code" => 400, "message" => "Court Id is empty"], 422);
         } elseif (!$request->has("reservation_date")) {
             return response()->json(["code" => 400, "message" => "Reservation date is empty"], 422);
         }
 
         $validator = Validator::make($request->all(), [
-            'reservation_date' => 'required|date_format:Y-m-d H:i',
+            'reservation_date' => 'required|date_format:Y-m-d H:i:s',
         ]);
         $court = Court::find($request->input("courts_id"));
-        $user = User::find($request->input("users_id"));
         if (!$court) {
             return response()->json(["code" => 404, "message" => "Court Id not found", "id" => $request->input("courts_id")], 404);
         }
         if ($court->active == 0) {
             return response()->json(["code" => 400, "message" => "Court not avaliable", "court" => $court], 400);
-        } elseif (!$user) {
-            return response()->json(["code" => 404, "message" => "User Id not found", "id" => $request->input("users_id")], 404);
-        } elseif ($user->enabled == 0) {
-            return response()->json(["code" => 400, "message" => "User not enabled", "user" => $user], 400);
         } elseif ($validator->fails()) {
             return response()->json(["code" => 422, "message" => $validator->errors()], 422);
         } elseif (CourtUser::where('reservation_date', $request->input('reservation_date'))->where('courts_id', $request->input('courts_id'))->count() !== 0) {
             return response()->json(["code" => 400, "message" => "Court already reserved for date and time chosen"], 400);
         } else {
-            $newReservation = CourtUser::create($request->all());
+            $newReservation = new CourtUser($request->all());
+            $newReservation->users_id = Auth::user()->id;
+            $newReservation->save();
             return response()->json(["message" => "Reservation created successfully", "reservation" => $newReservation], 201);
         }
     }

@@ -38,7 +38,7 @@
             <div class="col-sm-3">
                 <form id="jugadores" class="hidden">
                     <hr>
-                    <strong id="separar" class="col-sm-12">Choose the players:</strong>
+                    <strong id="choose-p" class="col-sm-12">Choose the players:</strong>
                     <div class="form-group">
                         <label for="player1">Player 1</label>
                         <input type="text" class="form-control" id="player1" disabled="disabled"

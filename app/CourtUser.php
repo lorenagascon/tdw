@@ -17,7 +17,7 @@ class CourtUser extends Authenticatable
     ];
 
     protected $guarded = [
-        'id'
+        'id', 'created_at'
     ];
 
     /**
@@ -26,6 +26,6 @@ class CourtUser extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'created_at', 'updated_at'
+        'updated_at'
     ];
 }

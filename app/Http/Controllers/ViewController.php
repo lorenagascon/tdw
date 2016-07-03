@@ -14,4 +14,8 @@ class ViewController extends Controller
         return view('userProfile');
     }
 
+    public function reservationslist()
+    {
+        return view('userList');
+    }
 }

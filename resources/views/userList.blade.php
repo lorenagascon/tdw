@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('user')
 
 @section('content')
 
@@ -19,7 +19,7 @@
                                 <th>Reserved at</th>
                             </tr>
                             </thead>
-                            <tbody id="lista-admin"></tbody>
+                            <tbody id="lista"></tbody>
                         </table>
                     </div>
                 </div>
@@ -27,5 +27,5 @@
         </div>
     </div>
 
-    <script src="{{asset("js/admin-list.js")}}"></script>
+    <script src="{{asset("js/user-list.js")}}"></script>
 @endsection

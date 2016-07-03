@@ -4,6 +4,7 @@
         <!-- Left Side Of Navbar -->
 <ul class="nav navbar-nav">
     <li><a href="{{ url('/') }}">Home</a></li>
+    <li><a href="{{ url('user/list') }}">Reservations</a></li>
 </ul>
 @endsection
 
