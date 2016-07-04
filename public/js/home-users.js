@@ -32,6 +32,7 @@ $(document).ready(function () {
                 success: (function (data) {
                     toastr.success('Reserved successfully');
                     search();
+                    $('#choose-p').css('color', 'black');
                     $('#player2').val('');
                     $('#player3').val('');
                     $('#player4').val('');
@@ -93,7 +94,7 @@ $(function () {
     $('#datetimepicker').datetimepicker({
         format: 'DD/MM/YYYY',
         daysOfWeekDisabled: [0, 6],
-        minDate: moment(),
+        minDate: moment().add(1, 'days'),
         maxDate: moment().add(10, 'days')
     });
 });

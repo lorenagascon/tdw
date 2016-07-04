@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        if (Auth::user()->rol == 1)
+        if (Auth::user()->rol == 1 && Auth::user()->enabled == 1)
             return redirect('admin');
         elseif (Auth::user()->enabled == 1)
             return view('home');

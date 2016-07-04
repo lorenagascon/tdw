@@ -43,15 +43,12 @@ $(document).ready(function () {
             })
             .fail(function (jqXHR, textStatus, error) {
                 var respJson = JSON.parse(jqXHR.responseText);
-                console.log(respJson.email);
-                if (respJson.name) {
-                    $("#error-name").html(respJson.name);
+                if (respJson.username) {
+                    $("#error-name").html(respJson.username);
                 }
                 if (respJson.email) {
                     $("#error-email").html(respJson.email);
                 }
-                console.log(respJson.responseText.email[0]);
-                console.log(error);
             });
     });
 

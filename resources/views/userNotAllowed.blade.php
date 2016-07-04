@@ -2,7 +2,7 @@
 
 @section('content')
     <h4>Sorry</h4>
-    <h5>Wait until an admin enable you</h5>
+    <h5>Wait until an admin enables you</h5>
 @endsection
 
 @section('dropdown')

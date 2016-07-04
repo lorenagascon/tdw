@@ -26,7 +26,7 @@
         </div>
         <div class="form-group col-sm-12">
             <label for="phone">Phone number:</label>
-            <input type="text" class="form-control" id="prof-phone" value={{ Auth::user()->telephone }}>
+            <input type="text" class="form-control" id="prof-phone" value={{ Auth::user()->phone }}>
         </div>
         <div class="form-group col-sm-12">
             <label for="prof-psswrd">Password:</label>
