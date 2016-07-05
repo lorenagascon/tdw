@@ -43,7 +43,7 @@ class CourtController extends Controller
     public function store(Request $request)
     {
         $newCourt = Court::create($request->all());
-        return response()->json(["message" => 'Court created successfully', 'court' => $newCourt], 200);
+        return response()->json(["message" => 'Court created successfully', 'court' => $newCourt], 201);
     }
 
     /**

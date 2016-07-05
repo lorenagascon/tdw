@@ -49,7 +49,7 @@ class UserController extends Controller
             $newUser = User::create($request->all());
             $newUser->password = bcrypt($request->input('password'));
             $newUser->save();
-            return response()->json(['message'=>'User created successfully','user' => $newUser], 200);
+            return response()->json(['message' => 'User created successfully', 'user' => $newUser], 201);
         }
         else
             return response()->json(['code' => '422', 'message' => 'Password is empty'], 422);
